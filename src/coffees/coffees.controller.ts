@@ -6,32 +6,38 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
+import { CoffeesService } from './coffees.service';
+import { CreateCoffeeDto } from './dto/create-coffee.dto';
+import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 
 @Controller('coffees')
 export class CoffeesController {
+  constructor(private readonly coffeeService: CoffeesService) {}
+
   @Get()
-  findAll() {
-    return 'This returns all coffees';
+  findAll(@Query() paginationQuery) {
+    return this.coffeeService.findAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return `This returns #${id} coffee`;
+    return this.coffeeService.findOne(id);
   }
 
   @Post()
-  create(@Body('name') body) {
-    return body;
+  create(@Body('name') createCoffeeDto: CreateCoffeeDto) {
+    return this.coffeeService.create(createCoffeeDto);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() body) {
-    return `This action updates #${id} coffee`;
+  update(@Param('id') id: string, @Body() updateCoffeeDto: UpdateCoffeeDto) {
+    return this.coffeeService.update(id, updateCoffeeDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return `This action remove #${id} coffee`;
+    return this.coffeeService.remove(id);
   }
 }
