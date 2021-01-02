@@ -15,5 +15,6 @@ export class Coffee extends Document {
   @Prop([String])
   flavors: string[];
 }
+export type CoffeeDocument = Coffee & Document;
 
 export const CoffeesSchema = SchemaFactory.createForClass(Coffee);

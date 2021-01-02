@@ -1,8 +1,11 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
+import { Document } from 'mongoose';
+
+export type EventDocument = Event & Document;
 
 @Schema()
-export class Event extends mongoose.Document {
+export class Event {
   @Prop()
   type: string;
 
