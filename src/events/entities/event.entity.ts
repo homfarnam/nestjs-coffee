@@ -9,9 +9,6 @@ export class Event extends mongoose.Document {
   @Prop()
   name: string;
 
-  @Prop({ default: 0 })
-  recommendations: number;
-
   @Prop(mongoose.SchemaTypes.Mixed)
   payload: Record<string, any>;
 }
